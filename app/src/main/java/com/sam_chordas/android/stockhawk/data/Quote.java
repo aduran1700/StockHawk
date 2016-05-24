@@ -16,11 +16,18 @@ public class Quote implements Parcelable{
         this.symbol = in.readString();
         this.date = in.readString();
         this.close = in.readFloat();
+        this.percentChange = in.readString();
+        this.change = in.readString();
+        this.isUp = in.readInt();
     }
 
     public String symbol;
     public String date;
     public float close;
+    public String percentChange;
+    public String change;
+    public int isUp;
+
 
     public static final Creator<Quote> CREATOR = new Creator<Quote>() {
         @Override
@@ -44,6 +51,9 @@ public class Quote implements Parcelable{
         dest.writeString(symbol);
         dest.writeString(date);
         dest.writeFloat(close);
+        dest.writeString(percentChange);
+        dest.writeString(change);
+        dest.writeInt(isUp);
     }
 
 

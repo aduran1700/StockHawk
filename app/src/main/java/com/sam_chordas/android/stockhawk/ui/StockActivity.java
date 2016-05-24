@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.db.chart.Tools;
 import com.db.chart.model.LineSet;
@@ -40,8 +41,18 @@ public class StockActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stock);
 
         mChart = (LineChartView) findViewById(R.id.linechart);
+        TextView stockChange = (TextView) findViewById(R.id.stock_change);
 
         Quote quote = getIntent().getParcelableExtra(MyStocksActivity.QUOTE_ITEM);
+        ((TextView) findViewById(R.id.stock_symbol)).setText(quote.symbol);
+        ((TextView) findViewById(R.id.stock_price)).setText(quote.close + " USD");
+        stockChange.setText(quote.change + " (" + quote.percentChange.replace("+", "").replace("-","") + ")");
+
+        if(quote.isUp == 1) {
+            stockChange.setTextColor(Color.GREEN);
+        } else {
+            stockChange.setTextColor(Color.RED);
+        }
 
         new StockHistoricalDataAsyncTask().execute(quote);
     }
@@ -127,6 +138,29 @@ public class StockActivity extends AppCompatActivity {
                 }
             }
 
+            if(quotes.size() < 6) {
+                try {
+                    dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = dateFormat.parse(endDate);
+                    dateFormat = new SimpleDateFormat("MMM dd");
+                    String today = dateFormat.format(date);
+                    dataSet.addPoint(new Point(today, aQuote.close));
+                    quotes.add(aQuote);
+
+                    if(low > aQuote.close)
+                        low = aQuote.close;
+
+                    if(high < aQuote.close)
+                        high = aQuote.close;
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
             StockActivity.this.low = Math.round(low)-5;
             StockActivity.this.high = Math.round(high)+5;
             dataSet.setColor(Color.parseColor("#b3b5bb"))
@@ -134,9 +168,6 @@ public class StockActivity extends AppCompatActivity {
                     .setDotsColor(Color.parseColor("#ffc755"))
                     .setThickness(4)
                     .endAt(quotes.size());
-
-
-
 
             //quotes.add(0, quote);
             return dataSet;

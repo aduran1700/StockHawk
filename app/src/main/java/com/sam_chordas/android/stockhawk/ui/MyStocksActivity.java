@@ -103,6 +103,12 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                                 quote.close = Float.parseFloat(Utils.truncateBidPrice(
                                         cursor.getString(cursor.getColumnIndex(QuoteColumns.BIDPRICE))));
 
+                                quote.date = cursor.getString(cursor.getColumnIndex(QuoteColumns.CREATED));
+                                quote.percentChange = cursor.getString(cursor.getColumnIndex(QuoteColumns.PERCENT_CHANGE));
+                                quote.change = cursor.getString(cursor.getColumnIndex(QuoteColumns.CHANGE));
+                                quote.isUp = cursor.getInt(cursor.getColumnIndex(QuoteColumns.ISUP));
+
+
 
                                 Intent intent = new Intent(MyStocksActivity.this, StockActivity.class);
                                 intent.putExtra(MyStocksActivity.QUOTE_ITEM, quote);
