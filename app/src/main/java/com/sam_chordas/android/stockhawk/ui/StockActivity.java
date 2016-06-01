@@ -41,17 +41,27 @@ public class StockActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stock);
 
         mChart = (LineChartView) findViewById(R.id.linechart);
-        TextView stockChange = (TextView) findViewById(R.id.stock_change);
+        TextView stockChangeTextView = (TextView) findViewById(R.id.stock_change);
+        TextView stockSymbolTextView = (TextView) findViewById(R.id.stock_symbol);
+        TextView stockPriceTextView = (TextView) findViewById(R.id.stock_price);
 
         Quote quote = getIntent().getParcelableExtra(MyStocksActivity.QUOTE_ITEM);
-        ((TextView) findViewById(R.id.stock_symbol)).setText(quote.symbol);
-        ((TextView) findViewById(R.id.stock_price)).setText(quote.close + " USD");
-        stockChange.setText(quote.change + " (" + quote.percentChange.replace("+", "").replace("-","") + ")");
+        String stockSymbol = quote.symbol;
+        String stockPrice = quote.close + " USD";
+        String stockChange = quote.change + " (" + quote.percentChange.replace("+", "").replace("-","") + ")";
+
+        stockSymbolTextView.setText(stockSymbol);
+        stockPriceTextView.setText(stockPrice);
+        stockChangeTextView.setText(stockChange);
+
+        stockChangeTextView.setContentDescription(getString(R.string.a11y_stock_symbol, stockSymbol));
+        stockPriceTextView.setContentDescription(getString(R.string.a11y_stock_price, stockPrice ));
+        stockPriceTextView.setContentDescription(getString(R.string.a11y_stock_change, stockChange ));
 
         if(quote.isUp == 1) {
-            stockChange.setTextColor(Color.GREEN);
+            stockChangeTextView.setBackgroundResource(R.drawable.percent_change_pill_green);
         } else {
-            stockChange.setTextColor(Color.RED);
+            stockChangeTextView.setBackgroundResource(R.drawable.percent_change_pill_red);
         }
 
         new StockHistoricalDataAsyncTask().execute(quote);

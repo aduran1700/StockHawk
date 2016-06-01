@@ -7,9 +7,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
     tools:context="com.sam_chordas.android.stockhawk.ui.StockActivity">
-
-
 
 
     <com.db.chart.view.LineChartView
@@ -22,7 +22,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        style="@style/StockSymbolTextStyle"
+        android:textColor="@android:color/white"
         tools:text="GOOG"
         android:id="@+id/stock_symbol"
         android:layout_alignParentTop="true"
@@ -32,7 +33,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        style="@style/BidPriceTextStyle"
         tools:text="000.0"
         android:id="@+id/stock_price"
         android:layout_marginTop="16dp"
@@ -44,14 +45,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:background="@drawable/percent_change_pill"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp"
+        style="@style/PercentChangeTextStyle"
         tools:text="+ 1.12"
         android:id="@+id/stock_change"
         android:layout_alignTop="@+id/stock_price"
         android:layout_toRightOf="@+id/stock_price"
         android:layout_toEndOf="@+id/stock_price"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"/>
+        android:layout_marginStart="16dp" />
 
 
 </RelativeLayout>

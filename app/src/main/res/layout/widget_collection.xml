@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:padding="@dimen/widget_margin">
 
     <FrameLayout
@@ -18,19 +18,29 @@
             android:layout_height="wrap_content"
             android:text="@string/widget_title"
             android:textSize="@dimen/md_title_textsize"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
     </FrameLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <ListView
             android:id="@+id/widget_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"
             android:dividerHeight="0dp"
-            tools:listitem="@layout/widget_collection_item"/>
+            tools:listitem="@layout/widget_collection_item" />
+
+        <TextView
+            android:id="@+id/widget_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:text="@string/network_toast"/>
     </FrameLayout>
 
 </LinearLayout>
