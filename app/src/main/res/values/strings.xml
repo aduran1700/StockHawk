@@ -16,4 +16,5 @@
     <string name="widget_title">Today\'s Market</string>
     <string name="network_toast">Uh-oh! This app requires an internet connection</string>
     <string name="empty_stock_list">Your stock list is empty</string>
+    <string name="stock_exist">This stock is already saved!</string>
 </resources>
