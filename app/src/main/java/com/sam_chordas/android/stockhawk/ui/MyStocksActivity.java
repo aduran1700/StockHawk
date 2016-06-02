@@ -87,8 +87,9 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
+        View emptyView = findViewById(R.id.recyclerview_stock_empty);
 
-        mCursorAdapter = new QuoteCursorAdapter(this, null);
+        mCursorAdapter = new QuoteCursorAdapter(this, null, emptyView);
         recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(this,
                 new RecyclerViewItemClickListener.OnItemClickListener() {
                     @Override

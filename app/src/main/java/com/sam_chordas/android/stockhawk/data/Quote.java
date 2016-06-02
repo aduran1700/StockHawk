@@ -56,5 +56,4 @@ public class Quote implements Parcelable{
         dest.writeInt(isUp);
     }
 
-
 }

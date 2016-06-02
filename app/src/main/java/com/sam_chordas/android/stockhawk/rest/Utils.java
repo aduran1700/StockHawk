@@ -111,6 +111,7 @@ public class Utils {
       if(change.equals("null"))
         return null;
 
+      builder.withValue(QuoteColumns.CREATED, jsonObject.getString("LastTradeDate"));
       builder.withValue(QuoteColumns.SYMBOL, jsonObject.getString("symbol"));
       builder.withValue(QuoteColumns.BIDPRICE, truncateBidPrice(jsonObject.getString("Bid")));
       builder.withValue(QuoteColumns.PERCENT_CHANGE, truncateChange(

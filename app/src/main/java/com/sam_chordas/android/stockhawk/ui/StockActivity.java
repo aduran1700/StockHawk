@@ -54,9 +54,9 @@ public class StockActivity extends AppCompatActivity {
         stockPriceTextView.setText(stockPrice);
         stockChangeTextView.setText(stockChange);
 
-        stockChangeTextView.setContentDescription(getString(R.string.a11y_stock_symbol, stockSymbol));
+        stockSymbolTextView.setContentDescription(getString(R.string.a11y_stock_symbol, stockSymbol));
         stockPriceTextView.setContentDescription(getString(R.string.a11y_stock_price, stockPrice ));
-        stockPriceTextView.setContentDescription(getString(R.string.a11y_stock_change, stockChange ));
+        stockChangeTextView.setContentDescription(getString(R.string.a11y_stock_change, stockChange ));
 
         if(quote.isUp == 1) {
             stockChangeTextView.setBackgroundResource(R.drawable.percent_change_pill_green);
@@ -118,6 +118,7 @@ public class StockActivity extends AppCompatActivity {
             float low = 0;
             float high = 0;
 
+
             for(int i = quotes.size()-1; i >= 0; i--){
                 Quote quote = quotes.get(i);
 
@@ -148,29 +149,6 @@ public class StockActivity extends AppCompatActivity {
                 }
             }
 
-            if(quotes.size() < 6) {
-                try {
-                    dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    Date date = dateFormat.parse(endDate);
-                    dateFormat = new SimpleDateFormat("MMM dd");
-                    String today = dateFormat.format(date);
-                    dataSet.addPoint(new Point(today, aQuote.close));
-                    quotes.add(aQuote);
-
-                    if(low > aQuote.close)
-                        low = aQuote.close;
-
-                    if(high < aQuote.close)
-                        high = aQuote.close;
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-
-
-            }
-
             StockActivity.this.low = Math.round(low)-5;
             StockActivity.this.high = Math.round(high)+5;
             dataSet.setColor(Color.parseColor("#b3b5bb"))
@@ -179,7 +157,6 @@ public class StockActivity extends AppCompatActivity {
                     .setThickness(4)
                     .endAt(quotes.size());
 
-            //quotes.add(0, quote);
             return dataSet;
         }
 
